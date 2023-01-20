@@ -93,9 +93,6 @@ namespace laba6
                 Array.Resize(ref stack, stack.Length + 1);
                 Array.Copy(stack, versh + 1, stack, versh + 2, stack.Length - 2 - versh);
                 stack[versh + 1] = dop;
-                Array.Resize(ref vhodStr, vhodStr.Length + 1);
-                Array.Copy(vhodStr, versh + 1, vhodStr, versh + 2, vhodStr.Length - 2 - versh);
-                vhodStr[versh + 1] = dop;
                 pos_vhod -= 1;
             }
 
@@ -157,10 +154,10 @@ namespace laba6
                         case 5:
                             if (stack[versh] == "<спис_опер>") SDVIG();
                             else if (stack[versh] == "}") GOSTATE(71);
-                            else if (stack[versh] == ";") GOSTATE(70);
+                            else if ((stack[versh] == ";")&(versh!=stack.Length-1)) GOSTATE(70);
                             else
                             {
-                                MessageBox.Show("Ожидался: ;");
+                                MessageBox.Show("Ожидался: }, ;");
                                 iserror = false;
                                 result = false;
                             }
@@ -385,7 +382,7 @@ namespace laba6
                                 SVERTKADOP(str);
                                 GOSTATE(11);
                             }
-                            else { MessageBox.Show("Ожидался: ;"); iserror = false; result = false; }
+                            else { MessageBox.Show("Ожидался: ;, =,','"); iserror = false; result = false; }
 
                             break;
                         case 89:
